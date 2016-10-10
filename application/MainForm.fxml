@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.42923794712286156" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="645.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FurieController">
+   <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="704.0">
+         <children>
+            <LineChart fx:id="lineChart" createSymbols="false" layoutX="234.0" layoutY="-5.0" legendVisible="false" prefHeight="268.0" prefWidth="719.0" stylesheets="file:/C:/WORK/study/Erlang/furieFX/src/application/css/application.css">
+              <xAxis>
+                <NumberAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis label=" " side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <Button layoutY="2.0" mnemonicParsing="false" onAction="#loadSignal" prefHeight="25.0" prefWidth="243.0" text="Load signal" />
+            <Button layoutY="34.0" mnemonicParsing="false" onAction="#genRectangularSignal" prefHeight="25.0" prefWidth="243.0" text="Rectangular signal" />
+            <Button layoutY="67.0" mnemonicParsing="false" onAction="#genSawSignal" prefHeight="25.0" prefWidth="243.0" text="Sawtooth signal" />
+            <Button layoutY="101.0" mnemonicParsing="false" onAction="#genTriangularSignal" prefHeight="25.0" prefWidth="243.0" text="Triangular signal" />
+            <Label layoutX="132.0" layoutY="143.0" text="A" />
+            <Label layoutX="123.0" layoutY="168.0" text="T, s" />
+            <Label layoutX="124.0" layoutY="191.0" text="τ, s" />
+            <Label layoutX="11.0" layoutY="216.0" text="Count of points in period" />
+            <Label layoutX="51.0" layoutY="241.0" text="Count of periods" />
+            <TextField fx:id="amplitudeField" layoutX="155.0" layoutY="139.0" prefHeight="25.0" prefWidth="90.0" text="1" />
+            <TextField fx:id="periodField" layoutX="155.0" layoutY="164.0" prefHeight="25.0" prefWidth="90.0" text="0.1" />
+            <TextField fx:id="tauField" layoutX="155.0" layoutY="187.0" prefHeight="25.0" prefWidth="90.0" text="0.04" />
+            <TextField fx:id="pointsCountField" layoutX="155.0" layoutY="212.0" prefHeight="25.0" prefWidth="90.0" text="50" />
+            <TextField fx:id="periodsCountField" layoutX="155.0" layoutY="237.0" prefHeight="25.0" prefWidth="90.0" text="2" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <Accordion layoutX="-1.0" prefHeight="364.0" prefWidth="961.0">
+              <panes>
+                <TitledPane animated="false" prefHeight="339.0" prefWidth="740.0" text="Furie transform">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <LineChart fx:id="amplitudeChart" createSymbols="false" layoutX="6.0" layoutY="34.0" legendVisible="false" prefHeight="253.0" prefWidth="665.0" title="Amplitude spectrum">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <LineChart fx:id="phaseChart" createSymbols="false" layoutX="662.0" layoutY="35.0" legendVisible="false" prefHeight="251.0" prefWidth="291.0" title="Phase spectrum">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <Button layoutY="2.0" mnemonicParsing="false" onAction="#doDiscretFurieTransform" text="Discret Furier transform" />
+                              <Button layoutX="149.0" layoutY="2.0" mnemonicParsing="false" onAction="#doFastFurieTransform" text="Binary Furier transform" />
+                              <Button layoutX="295.0" layoutY="2.0" mnemonicParsing="false" onAction="#doFastNFurieTransform" text="Fast transform for all points" />
+                              <Label fx:id="message" layoutX="465.0" layoutY="6.0" text="Press button to run transform">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="time" layoutX="723.0" layoutY="8.0" prefHeight="17.0" prefWidth="222.0" textFill="#1a228d" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" prefHeight="314.0" prefWidth="731.0" text="Approximation">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <LineChart fx:id="approxChart" createSymbols="false" layoutX="5.0" layoutY="23.0" legendVisible="false" prefHeight="262.0" prefWidth="950.0">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <Button layoutX="487.0" layoutY="2.0" mnemonicParsing="false" onAction="#doApproximate" text="Approximate" />
+                              <TextField fx:id="garmoniqueFiled" layoutX="136.0" layoutY="2.0" prefHeight="25.0" prefWidth="344.0" text="5" />
+                              <Label layoutX="6.0" layoutY="6.0" text="Count of garmoniques" />
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" prefHeight="314.0" prefWidth="731.0" text="Filters">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <LineChart fx:id="leftChart" createSymbols="false" layoutY="30.0" legendVisible="false" prefHeight="283.0" prefWidth="959.0">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <TextField fx:id="topBorderField" layoutX="35.0" layoutY="3.0" prefHeight="25.0" prefWidth="90.0" text="3" />
+                              <TextField fx:id="bottomBorderField" layoutX="150.0" layoutY="3.0" prefHeight="25.0" prefWidth="90.0" text="35" />
+                              <Button layoutX="312.0" layoutY="3.0" mnemonicParsing="false" onAction="#doFilter" text="Filter" />
+                              <Label layoutY="6.0" text="From" />
+                              <Label layoutX="132.0" layoutY="7.0" text="to" />
+                              <CheckBox fx:id="isInsideChecker" layoutX="250.0" layoutY="7.0" mnemonicParsing="false" selected="true" text="inside" />
+                           </children></AnchorPane>
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
