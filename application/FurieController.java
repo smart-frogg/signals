@@ -51,7 +51,8 @@ public class FurieController {
 				String str = scanner.next();
 				if(str.isEmpty())
 					break;
-				readSignal.add((Integer.parseInt(str)-zero)*stepY);
+				Double d = new Double((Integer.parseInt(str)-zero)*stepY);
+				readSignal.add(d);
 			}
 			clearSignal(readSignal.size());
 			this.OYLabel = OYLabel;

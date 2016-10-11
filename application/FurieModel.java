@@ -191,4 +191,26 @@ public class FurieModel {
 		}
 		return transform;
 	}
+	
+	public double result[][];
+	public double[][] filter(double signal[][], double topBorder, double bottomBorder, boolean isInside)
+	{
+		int pointsCount = signal[0].length;
+		double[][] transformation = model.fastFurieNTransform(signal,false);
+		result = model.getCopy(transformation);
+		for (int k=0; k<pointsCount; k++)
+			if(!isInside)
+			{
+				if(k>topBorder && k<bottomBorder || k<pointsCount-topBorder && k>pointsCount-bottomBorder)
+					result[0][k] = result[1][k] = 0; 
+			}	
+			else
+			{
+				if(!(k>topBorder && k<bottomBorder || k<pointsCount-topBorder && k>pointsCount-bottomBorder))
+					result[0][k] = result[1][k] = 0; 
+				
+			}
+
+		return model.fastFurieNTransform(result,true);		
+	}
 }

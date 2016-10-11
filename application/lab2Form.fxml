@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Lab2Controller">
+   <children>
+      <Pane prefHeight="703.0" prefWidth="711.0">
+         <children>
+            <LineChart fx:id="signalChart" createSymbols="false" layoutY="48.0" legendVisible="false" prefHeight="150.0" prefWidth="711.0">
+              <xAxis>
+                <NumberAxis animated="false" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadSignal" text="Load file" />
+            <Label fx:id="fileNameLabel" layoutX="93.0" layoutY="18.0" text="No file loaded" />
+
+                             <AnchorPane layoutY="373.0" minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="711.0">
+                           <children>
+                              <LineChart fx:id="phaseFilterChart" animated="false" createSymbols="false" layoutX="2.0" layoutY="35.0" prefHeight="110.0" prefWidth="704.0">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <LineChart fx:id="logAmplitudeFilterChart" animated="false" createSymbols="false" layoutX="356.0" layoutY="176.0" prefHeight="150.0" prefWidth="342.0">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <LineChart fx:id="amplitudeFilterChart" animated="false" createSymbols="false" layoutX="2.0" layoutY="176.0" prefHeight="150.0" prefWidth="359.0">
+                                <xAxis>
+                                  <NumberAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <Button layoutX="622.0" layoutY="2.0" mnemonicParsing="false" onAction="#createFilter" text="Create filter" />
+                              <Label layoutX="14.0" layoutY="6.0" text="N" />
+                              <TextField fx:id="nField" layoutX="37.0" layoutY="2.0" text="51" />  
+                           </children>
+                        </AnchorPane>
+
+            <Button layoutX="619.0" layoutY="14.0" mnemonicParsing="false" onAction="#restoreSignal" text="Restore signal" />
+            <Button layoutX="574.0" layoutY="14.0" mnemonicParsing="false" onAction="#genSawSignal" text="Saw" />
+            <Button layoutX="374.0" layoutY="14.0" mnemonicParsing="false" onAction="#crop" text="Crop" />
+            <Label layoutX="320.0" layoutY="18.0" text="2^" />
+            <TextField fx:id="cropField" layoutX="337.0" layoutY="14.0" prefHeight="25.0" prefWidth="37.0" text="18" />
+            <Button fx:id="applyFourierButton" layoutX="423.0" layoutY="14.0" mnemonicParsing="false" onAction="#doFilterLow" text="Filter low" />
+            <Button layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#doFilterHigh" text="Filter high" />
+            <LineChart fx:id="idealChart" createSymbols="false" layoutX="342.0" layoutY="187.0" legendVisible="false" prefHeight="169.0" prefWidth="359.0">
+              <xAxis>
+                <NumberAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
