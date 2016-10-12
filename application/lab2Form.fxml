@@ -4,11 +4,12 @@
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Lab2Controller">
    <children>
-      <Pane prefHeight="703.0" prefWidth="711.0">
+      <Pane prefHeight="657.0" prefWidth="711.0">
          <children>
             <LineChart fx:id="signalChart" createSymbols="false" layoutY="48.0" legendVisible="false" prefHeight="150.0" prefWidth="711.0">
               <xAxis>
@@ -21,9 +22,9 @@
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadSignal" text="Load file" />
             <Label fx:id="fileNameLabel" layoutX="93.0" layoutY="18.0" text="No file loaded" />
 
-                             <AnchorPane layoutY="373.0" minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="711.0">
+                             <AnchorPane layoutX="1.0" layoutY="352.0" minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="711.0">
                            <children>
-                              <LineChart fx:id="phaseFilterChart" animated="false" createSymbols="false" layoutX="2.0" layoutY="35.0" prefHeight="110.0" prefWidth="704.0">
+                              <LineChart fx:id="phaseFilterChart" animated="false" createSymbols="false" layoutX="4.0" layoutY="7.0" prefHeight="110.0" prefWidth="704.0">
                                 <xAxis>
                                   <NumberAxis side="BOTTOM" />
                                 </xAxis>
@@ -31,7 +32,7 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <LineChart fx:id="logAmplitudeFilterChart" animated="false" createSymbols="false" layoutX="356.0" layoutY="176.0" prefHeight="150.0" prefWidth="342.0">
+                              <LineChart fx:id="logAmplitudeFilterChart" animated="false" createSymbols="false" layoutX="358.0" layoutY="148.0" prefHeight="150.0" prefWidth="342.0">
                                 <xAxis>
                                   <NumberAxis side="BOTTOM" />
                                 </xAxis>
@@ -39,17 +40,14 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <LineChart fx:id="amplitudeFilterChart" animated="false" createSymbols="false" layoutX="2.0" layoutY="176.0" prefHeight="150.0" prefWidth="359.0">
+                              <LineChart fx:id="amplitudeFilterChart" animated="false" createSymbols="false" layoutX="4.0" layoutY="148.0" prefHeight="150.0" prefWidth="359.0">
                                 <xAxis>
                                   <NumberAxis side="BOTTOM" />
                                 </xAxis>
                                 <yAxis>
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
-                              </LineChart>
-                              <Button layoutX="622.0" layoutY="2.0" mnemonicParsing="false" onAction="#createFilter" text="Create filter" />
-                              <Label layoutX="14.0" layoutY="6.0" text="N" />
-                              <TextField fx:id="nField" layoutX="37.0" layoutY="2.0" text="51" />  
+                              </LineChart>  
                            </children>
                         </AnchorPane>
 
@@ -68,6 +66,30 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </LineChart>
+            <Pane layoutX="8.0" layoutY="198.0" prefHeight="142.0" prefWidth="348.0">
+               <children>
+                              <Label layoutX="7.0" layoutY="10.0" text="N" />
+                              <TextField fx:id="nField" layoutX="24.0" layoutY="7.0" prefHeight="25.0" prefWidth="78.0" text="51" />
+                              <Button layoutX="107.0" layoutY="7.0" mnemonicParsing="false" onAction="#showFilter" prefHeight="54.0" prefWidth="233.0" text="Create filter" />
+                  <Label layoutX="9.0" layoutY="39.0" text="f" />
+                  <TextField fx:id="fField" layoutX="24.0" layoutY="35.0" prefHeight="25.0" prefWidth="78.0" text="1000" />
+                      <ComboBox fx:id="windowChoiceBox" layoutX="93.0" layoutY="64.0" prefHeight="25.0" prefWidth="139.0" promptText="choose">
+      			      <items>
+      			        <FXCollections fx:factory="observableArrayList">
+      			          <String fx:value="Rectangular" />
+      			          <String fx:value="Bartlett" />
+      			          <String fx:value="Hanning" />
+      			          <String fx:value="Hamming" />
+      			          <String fx:value="Blackman" />
+      			        </FXCollections>
+      			      </items>
+      			</ComboBox>
+      
+                  <Label layoutX="11.0" layoutY="68.0" text="Window type" />
+                  <CheckBox fx:id="highCheckBox" layoutX="238.0" layoutY="68.0" mnemonicParsing="false" text="high-frequency" />
+                  <Button layoutX="7.0" layoutY="93.0" mnemonicParsing="false" onAction="#applyToSound" prefHeight="25.0" prefWidth="336.0" text="Apply to sound" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

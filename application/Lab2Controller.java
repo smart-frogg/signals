@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -92,7 +93,13 @@ public class Lab2Controller {
 	@FXML
 	TextField nField;
 	@FXML
+	TextField fField;
+	@FXML
 	TextField cropField;
+	@FXML
+	ComboBox<String> windowChoiceBox;
+	@FXML
+	CheckBox highCheckBox;
 	
 	private double A = 1000; // Амплитуда
 	private double T = 0.01; // Период
@@ -131,18 +138,55 @@ public class Lab2Controller {
 		fileNameLabel.setText("Saw signal");
 	}
 	
-	Filter filter;
-	@FXML
+	Filter filter = null;
 	protected void createFilter()
 	{
-		filter = new Filter();
 		int N = Integer.parseInt(nField.getText().toString());
-		filter.genSignal(N, 2*1000/gc, (int)gc);
-		filter.transform();
+		double fc = Double.parseDouble(fField.getText().toString());
+		String window = (String) windowChoiceBox.getValue();
+		filter = new Filter(N, 2*fc/gc, highCheckBox.isSelected());
+		if (window == null)
+			window = "Rectangular";
+		switch (window)
+		{
+			case "Bartlett": filter.genWBartlett(); break;
+			case "Hanning": filter.genWHanning(); break;
+			case "Hamming": filter.genWHamming(); break;
+			case "Blackman": filter.genWBlackman(); break;
+			case "Rectangular": 
+			default: filter.genWRectangular(); break;
+		}		
+	}
+	@FXML
+	protected void showFilter()
+	{
+		createFilter();
+		double testSignal[] = new double[10000];
+		testSignal[0] = 1000;
+		for(int i=1;i<testSignal.length;i++)
+			testSignal[i] = 0;
+		double newSignal[][] = filter.filter(testSignal);
+		filter.transform(newSignal);
 		drawChart(true,filter.getAmplitude(),amplitudeFilterChart);
 		drawChart(true,filter.getLogAmplitude(),logAmplitudeFilterChart);
 		drawChart(true,filter.getSignal(),phaseFilterChart);
 	}
+	
+	@FXML
+	protected void applyToSound() throws IOException
+	{
+		createFilter();
+		double newSignal[][] = filter.filter(signal[0]);
+		drawChart(false,newSignal,signalChart);
+		String window = (String) windowChoiceBox.getValue();
+		if (window == null)
+			window = "Rectangular";
+		if (!highCheckBox.isSelected())
+			saveSignal(newSignal, "high_"+window+".wav");
+		else
+			saveSignal(newSignal, "low_"+window+".wav");
+	}
+	
 	protected void clearSignal(int size)
 	{
 		steps = new double[size];
