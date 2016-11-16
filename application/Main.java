@@ -13,8 +13,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
     private Stage primaryStage;
-   // private SplitPane rootLayout;
-    private AnchorPane rootLayout;
+    private SplitPane rootLayout;
+   // private AnchorPane rootLayout;
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -30,8 +30,9 @@ public class Main extends Application {
         try {
             // Загружаем корневой макет из fxml файла.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("lab2Form.fxml"));
-            rootLayout = (AnchorPane) loader.load();
+           // loader.setLocation(Main.class.getResource("lab2Form.fxml"));
+            loader.setLocation(Main.class.getResource("lab4Form.fxml"));
+            rootLayout = (SplitPane) loader.load();
 
             // Отображаем сцену, содержащую корневой макет.
             Scene scene = new Scene(rootLayout);
@@ -42,7 +43,7 @@ public class Main extends Application {
 			this.primaryStage.show();
 			
 			// init the controller
-			Lab2Controller controller = (Lab2Controller) loader.getController();
+			Lab4Controller controller = (Lab4Controller) loader.getController();
 			controller.setStage(this.primaryStage);
             /*loader.setLocation(Main.class.getResource("MainForm.fxml"));
             rootLayout = (SplitPane) loader.load();

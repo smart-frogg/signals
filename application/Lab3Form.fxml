@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="656.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Lab3Controller">
+   <children>
+      <LineChart fx:id="dotsFilterChart" createSymbols="false" layoutX="9.0" layoutY="39.0" legendVisible="false" prefHeight="253.0" prefWidth="346.0">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Button layoutX="636.0" layoutY="14.0" mnemonicParsing="false" onAction="#showButterworth" text="Butterworth filter" />
+      <Button layoutX="750.0" layoutY="14.0" mnemonicParsing="false" onAction="#showChebyshevI" text="Chebyshev filter Type I" />
+      <Button layoutX="893.0" layoutY="14.0" mnemonicParsing="false" onAction="#showChebyshevII" text="Chebyshev filter Type II" />
+      <TextField fx:id="nField" layoutX="29.0" layoutY="14.0" prefHeight="25.0" prefWidth="45.0" text="5" />
+      <TextField fx:id="epsField" layoutX="137.0" layoutY="14.0" prefHeight="25.0" prefWidth="45.0" text="0.5" />
+      <Label layoutX="14.0" layoutY="18.0" text="N" />
+      <Label layoutX="93.0" layoutY="18.0" text="Epsilon" />
+      <LineChart fx:id="absFilterChart" createSymbols="false" layoutX="355.0" layoutY="39.0" legendVisible="false" prefHeight="253.0" prefWidth="346.0">
+         <xAxis>
+            <NumberAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <LineChart fx:id="argFilterChart" createSymbols="false" layoutX="701.0" layoutY="39.0" legendVisible="false" prefHeight="253.0" prefWidth="346.0">
+         <xAxis>
+            <NumberAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <TextField fx:id="w0Field" layoutX="225.0" layoutY="14.0" prefHeight="25.0" prefWidth="45.0" text="1000" />
+      <Label layoutX="202.0" layoutY="18.0" text="w0" />
+      <CheckBox fx:id="isHighCheckBox" layoutX="282.0" layoutY="18.0" mnemonicParsing="false" text="High" />
+             	<Button layoutX="14.0" layoutY="292.0" mnemonicParsing="false" onAction="#loadSignal" text="Load file" />
+            <Label fx:id="fileNameLabel" layoutX="85.0" layoutY="296.0" text="No file loaded" />
+                   <LineChart fx:id="signalChart" createSymbols="false" layoutY="316.0" legendVisible="false" prefHeight="177.0" prefWidth="1037.0">
+              <xAxis>
+                <NumberAxis animated="false" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+      <Button layoutX="9.0" layoutY="493.0" mnemonicParsing="false" onAction="#doFilterButterworth" text="apply Butterworth" />     
+   </children>
+</AnchorPane>
